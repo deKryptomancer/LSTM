@@ -1,5 +1,3 @@
-Here is the same `README.md` content in proper **Markdown format**:
-
 ````markdown
 # Stock-Price LSTM Pipeline
 
@@ -118,13 +116,3 @@ Example output:
 * Change `n_steps`, add dropout, or predict more periods.
 * To forecast daily bars instead of hourly, just supply daily-resolution CSVs.
 * For a live dashboard, wrap `infer_predict.py` into a Flask/FastAPI service.
-
----
-
-**Happy trading!** 🎯
-
-```
-
-Let me know if you'd like this zipped with your scripts and a sample CSV as a ready-to-run starter pack.
-```
-#

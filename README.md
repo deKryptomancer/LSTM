@@ -1,12 +1,12 @@
-````markdown
 # Stock-Price LSTM Pipeline
 
-A minimal, easy-to-use deep learning pipeline for time-series forecasting of stock prices using LSTM (Long Short-Term Memory) neural networks. This project is designed for rapid experimentation and prototyping with any OHLCV (Open, High, Low, Close, Volume) CSV data. It features a two-stage workflow:
+A minimal, easy-to-use deep learning pipeline for time-series forecasting of stock prices using LSTM (Long Short-Term Memory) neural networks. This project is designed for rapid experimentation and prototyping with any OHLCV (Open, High, Low, Close, Volume) CSV data.
 
-- **Training**: Learns from historical OHLCV data and saves a trained LSTM model and scaler.
-- **Inference**: Loads the trained model to predict the next three periods of OHLC prices.
+**Features:**
+- **Training:** Learns from historical OHLCV data and saves a trained LSTM model and scaler.
+- **Inference:** Loads the trained model to predict the next three periods of OHLC prices.
 
-This project is ideal for traders, analysts, and ML enthusiasts who want a simple, script-based approach to stock price forecasting.
+Ideal for traders, analysts, and ML enthusiasts who want a simple, script-based approach to stock price forecasting.
 
 ---
 
@@ -23,83 +23,73 @@ This project is ideal for traders, analysts, and ML enthusiasts who want a simpl
 
 ---
 
-## 1. Prerequisites
+## Requirements
 
-| Tool   | Tested Version |
-|--------|----------------|
-| Python | 3.9+           |
-| pip    | 22+            |
-
----
-
-## 2. Setup
-
-```bash
-# 1. Clone / copy the repo
-git clone <your-repo> && cd <your-repo>
-
-# 2. Create a virtual environment (recommended)
-python -m venv venv
-source venv/bin/activate      # Windows: venv\Scripts\activate
-
-# 3. Install dependencies
-pip install -r requirements.txt
-````
+- Python 3.9+
+- pip (latest recommended)
+- See `requirements.txt` for all Python dependencies
 
 ---
 
-## 3. Folder Layout
+## Project Structure
 
 ```
-project/
-├── csv/                   # put your OHLCV CSVs here
-│   └── aapl_1Y_1hour.csv  # any name is fine
-├── train_model.py
-├── infer_predict.py
-├── requirements.txt
+LSTM/
+├── data/                  # Place your OHLCV CSV files here
+│   └── aapl_5Y_1day_....csv
+├── train_model.py         # Script to train the LSTM model
+├── infer_predict.py       # Script for inference/prediction
+├── requirements.txt       # Python dependencies
+├── .gitignore
 └── README.md
 ```
 
-*The scripts always pick **the first** `.csv` they find in `./csv/`.*
+*The scripts use the first `.csv` file found in the `data/` folder.*
 
 ---
 
-## 4. Quick Start
-
-### 4.1 Train the model
+## Quickstart
 
 ```bash
+# 1. Clone the repository
+ git clone https://github.com/deKryptomancer/LSTM.git
+ cd LSTM
+
+# 2. Create and activate a virtual environment
+ python -m venv venv
+ venv\Scripts\activate      # On Windows
+
+# 3. Install dependencies
+ pip install -r requirements.txt
+
+# 4. Train the model
+ python train_model.py
+
+# 5. Run inference
+ python infer_predict.py
+```
+
+---
+
+## Usage Examples
+
+**Training:**
+```
 python train_model.py
 ```
+- Trains a 2-layer LSTM on your data (in `data/`) and saves:
+  - `model.h5` (trained model)
+  - `scaler.pkl` (MinMaxScaler)
 
-* Builds a 2-layer LSTM, trains 50 epochs, and saves:
-
-  * `model.h5` – trained network
-  * `scaler.pkl` – fitted MinMaxScaler
-
-### 4.2 Run inference
-
-```bash
+**Inference:**
+```
 python infer_predict.py
 ```
-
-* Loads the saved model/scaler
-* Predicts the next **3** periods
-* Prints a table and writes `future_predictions.csv`.
-
-Example output:
-
-```
-📅 Future Predictions:
-         Open        High         Low       Close                Date
-0  218.12 ...  219.30 ...  217.55 ...  218.44 ...  2025-06-17 11:00:00
-1  218.45 ...  219.70 ...  217.90 ...  218.80 ...  2025-06-17 12:00:00
-2  218.78 ...  220.05 ...  218.20 ...  219.15 ...  2025-06-17 13:00:00
-```
+- Loads the model/scaler, predicts the next 3 periods, prints results, and writes `future_predictions.csv`.
 
 ---
 
-## 5. CSV Requirements
+## CSV Requirements
 
 | Required Column                | Notes                               |
 | ------------------------------ | ----------------------------------- |
@@ -111,8 +101,22 @@ Example output:
 
 ---
 
-## 6. Extending
+## Extending
 
-* Change `n_steps`, add dropout, or predict more periods.
-* To forecast daily bars instead of hourly, just supply daily-resolution CSVs.
-* For a live dashboard, wrap `infer_predict.py` into a Flask/FastAPI service.
+- Change `n_steps`, add dropout, or predict more periods in the scripts.
+- To forecast daily bars instead of hourly, use daily-resolution CSVs.
+- For a live dashboard, wrap `infer_predict.py` into a Flask/FastAPI service.
+
+---
+
+## Contributing
+
+Pull requests and suggestions are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+[MIT](LICENSE) (or specify your license here)
+
+---
+
+**Happy trading!** 
